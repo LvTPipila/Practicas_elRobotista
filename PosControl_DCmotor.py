@@ -63,7 +63,7 @@ def compute_gains(Ts, Pos, R = 0., L=0., J=0., kc=0., kt=0., kf=0.):
 
 
 def simulation(x, t, *params):
-    motor, kp, kd, setpint = params
+    motor, kp, kd, setpoint = params
     motor.vin = kp * (setpoint - x[2]) + kd * (-x[1])
     return motor.dynamics(x, t)
 
@@ -71,7 +71,7 @@ def simulation(x, t, *params):
 if __name__ == '__main__':
     """ Setting up conditions for controller gain computations. """
     p_os, t_s = 0.05, 0.1   # Maximum overshoot and settlign time
-    motor = DC_Motor(R = 0.83, J = 2.37e-4, L = 2.31e-2, kc = 0.128, kt = 0.128, kf = 1.697e-3)
+    motor = DC_Motor(R = 0.83, J = 2.37e-3, L = 2.31e-3, kc = 0.128, kt = 0.128, kf = 1.697e-3)
     """ Compute the gains of the controller. """
     kd, kp = compute_gains(t_s, p_os, **motor.params)
     
