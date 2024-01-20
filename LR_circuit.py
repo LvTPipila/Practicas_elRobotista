@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
-# from scipy import signal
+
 
 def lr_circuit(t, y):
     r = 0.83
@@ -24,13 +24,6 @@ def main():
     ts = 1e-4
     t_span = np.arange(t0, tf + ts, ts)
     sol = solve_ivp(lr_circuit, [0., 0.1], [0.], t_eval=t_span)
-
-    """
-    K = 1/R
-    tau = L/R
-    lti = signal.lti([1/R], [tau, 1])
-    t, y = signal.step(lti)
-    """
 
     plt.plot(sol.t, sol.y[0])
     plt.xlabel('Time')
